@@ -1,4 +1,4 @@
-package com.daily_expenses.domain.service.implementation;
+package com.daily_expenses.domain.service;
 
 import com.daily_expenses.domain.model.User;
 import com.daily_expenses.domain.repository.IUserRepository;
@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl  implements IUserService {
@@ -17,5 +18,10 @@ public class UserServiceImpl  implements IUserService {
     @Override
     public List<User> findAll() {
         return this.userRepository.findAll();
+    }
+
+    @Override
+    public Optional<User> findById(Long id) {
+        return this.userRepository.findById(id);
     }
 }
