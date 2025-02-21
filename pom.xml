@@ -252,7 +252,7 @@
                         <configuration>
                             <excludes>
                                 <exclude>**/Main.class</exclude>
-                                <exclude>**/entity/UserEntity.class</exclude>
+                                <exclude>**/entity/**.class</exclude>
                             </excludes>
                         </configuration>
                     </execution>
