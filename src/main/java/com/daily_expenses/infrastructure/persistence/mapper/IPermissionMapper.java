@@ -1,4 +1,4 @@
-package com.daily_expenses.util.mapper;
+package com.daily_expenses.infrastructure.persistence.mapper;
 
 import com.daily_expenses.domain.model.Permission;
 import com.daily_expenses.infrastructure.persistence.entity.PermissionEntity;

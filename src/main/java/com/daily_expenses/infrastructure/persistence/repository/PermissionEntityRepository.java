@@ -4,7 +4,7 @@ import com.daily_expenses.domain.model.Permission;
 import com.daily_expenses.domain.repository.IPermissionRepository;
 import com.daily_expenses.infrastructure.persistence.entity.PermissionEntity;
 import com.daily_expenses.infrastructure.persistence.repository.crud.IPermissionCrudRepository;
-import com.daily_expenses.util.mapper.IPermissionMapper;
+import com.daily_expenses.infrastructure.persistence.mapper.IPermissionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 

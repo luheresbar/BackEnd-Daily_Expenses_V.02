@@ -1,4 +1,4 @@
-package com.daily_expenses.util.mapper;
+package com.daily_expenses.infrastructure.persistence.mapper;
 
 import com.daily_expenses.domain.model.User;
 import com.daily_expenses.infrastructure.persistence.entity.UserEntity;
@@ -17,3 +17,4 @@ public interface IUserMapper {
     UserEntity toUserEntity(User user);
 
 }
+
