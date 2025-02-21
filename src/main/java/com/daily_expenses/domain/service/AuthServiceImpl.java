@@ -30,11 +30,10 @@ public class AuthServiceImpl implements IAuthService {
         String password = authLoginRequest.password();
 
         Authentication authentication = this.authenticate(email, password);
-        String userId = authentication.getName();
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        setAuthentication(authentication);
 
         String accessToken = jwtUtils.createToken(authentication);
-        return new AuthResponseDTO(userId, "User loged succesfully", accessToken, true);
+        return new AuthResponseDTO(authentication.getName(), "User logged successfully", accessToken, true);
     }
 
     @Override
@@ -48,5 +47,9 @@ public class AuthServiceImpl implements IAuthService {
 
         return new UsernamePasswordAuthenticationToken(userId, null, userDetails.getAuthorities());
 
+    }
+
+    public void setAuthentication(Authentication authentication) {
+        SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 }

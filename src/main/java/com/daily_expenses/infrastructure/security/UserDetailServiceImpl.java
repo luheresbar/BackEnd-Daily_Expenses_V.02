@@ -21,8 +21,12 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String email) {
 
-         User userDomain = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("El usuario " + email + " no existe."));
+        User userDomain = userRepository.findByEmail(email).orElseThrow(() -> new UsernameNotFoundException("El usuario " + email + " no existe."));
 
+        return buildUserDetails(userDomain);
+    }
+
+    public UserDetails buildUserDetails(User userDomain) {
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
 
         userDomain.getRoles()
