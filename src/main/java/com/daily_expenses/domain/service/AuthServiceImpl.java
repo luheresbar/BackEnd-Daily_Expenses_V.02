@@ -42,10 +42,6 @@ public class AuthServiceImpl implements IAuthService {
         UserDetails userDetails = this.userDetailService.loadUserByUsername(email);
         String userId = userDetails.getUsername();
 
-        if (userDetails == null) {
-            throw new BadCredentialsException(String.format("Invalid email or password"));
-        }
-
         if (!passwordEncoder.matches(password, userDetails.getPassword())) {
             throw new BadCredentialsException("Incorrect Password");
         }

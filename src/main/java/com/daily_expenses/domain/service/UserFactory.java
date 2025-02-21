@@ -10,7 +10,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -32,7 +31,8 @@ public class UserFactory implements IUserFactory {
         List<String> rolesRequest = createUserRequest.roleRequest().roleListName();
 
         // Fetch all valid roles from the database
-        Set<String> validRoleEnums = roleRepository.findAll().stream()
+        List<Role> allRoles = this.roleRepository.findAll();
+        Set<String> validRoleEnums = allRoles.stream()
                 .map(Role::getRoleEnum)
                 .collect(Collectors.toSet());
 
@@ -43,8 +43,10 @@ public class UserFactory implements IUserFactory {
             }
         }
 
-        Set<Role> roleList = new HashSet<>(roleRepository.findRoleEntitiesByRoleEnumIn(rolesRequest));
-
+        // Filter the roles that match the requested roles
+        Set<Role> roleList = allRoles.stream()
+                .filter(role -> rolesRequest.contains(role.getRoleEnum()))
+                .collect(Collectors.toSet());
 
         return User.builder()
                 .username(username)

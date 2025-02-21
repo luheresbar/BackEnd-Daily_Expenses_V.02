@@ -33,7 +33,7 @@ public class SecurityConfig {
                     http.requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll();
 
                     // EndPoints Privados
-                    http.requestMatchers(HttpMethod.GET, "/method/get").hasAuthority("READ");
+                    http.requestMatchers(HttpMethod.GET, "/api/user/find/all").hasAuthority("READ");
                     http.requestMatchers(HttpMethod.POST, "/method/post").hasAuthority("CREATE");
                     http.requestMatchers(HttpMethod.DELETE, "/method/delete").hasAuthority("DELETE");
                     http.requestMatchers(HttpMethod.PUT, "/method/put").hasAuthority("UPDATE");

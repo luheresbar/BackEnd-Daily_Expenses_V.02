@@ -41,9 +41,8 @@ public class UserServiceImpl  implements IUserService {
     @Override
     public AuthResponseDTO createUser(AuthCreateUserRequestDTO createUserRequest) {
         User user = this.userFactory.createUser(createUserRequest);
-        System.out.println(user + " User en service"); //TODO: remove
         User savedUser = this.userRepository.save(user);
-        System.out.println(savedUser + " SavedUser en service"); //TODO: remove
+
         String accessToken = this.jwtTokenProvider.createToken(savedUser);
 
         return new AuthResponseDTO(savedUser.getUsername(), "User created successfully", accessToken, true);
