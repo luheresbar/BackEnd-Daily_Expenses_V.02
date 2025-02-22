@@ -52,4 +52,7 @@ public class AuthServiceImpl implements IAuthService {
     public void setAuthentication(Authentication authentication) {
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
+
+
+
 }

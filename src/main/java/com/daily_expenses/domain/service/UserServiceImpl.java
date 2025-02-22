@@ -51,6 +51,7 @@ public class UserServiceImpl  implements IUserService {
     public AuthResponseDTO createUser(AuthCreateUserRequestDTO createUserRequest) {
         User user = this.userFactory.createUser(createUserRequest);
         User savedUser = this.userRepository.save(user);
+
         UserDetails userDetails = this.userDetailService.buildUserDetails(savedUser);
         String userId = userDetails.getUsername();
         Authentication authentication = new UsernamePasswordAuthenticationToken(userId, null, userDetails.getAuthorities());

@@ -1,10 +1,7 @@
 package com.daily_expenses.domain.model;
 
 import com.daily_expenses.infrastructure.persistence.entity.RoleEnum;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Set;
 
@@ -12,6 +9,8 @@ import java.util.Set;
 @Setter
 @ToString
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 public class Role {
 
     private Long id;
