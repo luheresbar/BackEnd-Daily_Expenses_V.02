@@ -34,6 +34,8 @@ public class SecurityConfig {
 
                     // EndPoints Privados
                     http.requestMatchers(HttpMethod.GET, "/api/user/find/all").hasAuthority("READ");
+                    http.requestMatchers(HttpMethod.GET, "/api/user/find/id/{id}").hasAnyRole("DEVELOPER", "ADMIN");
+                    http.requestMatchers(HttpMethod.GET, "/api/user/find/email/{email}").hasAnyRole("DEVELOPER", "ADMIN");
                     http.requestMatchers(HttpMethod.POST, "/method/post").hasAuthority("CREATE");
                     http.requestMatchers(HttpMethod.DELETE, "/method/delete").hasAuthority("DELETE");
                     http.requestMatchers(HttpMethod.PUT, "/method/put").hasAuthority("UPDATE");

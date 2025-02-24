@@ -1,5 +1,6 @@
 package com.daily_expenses.domain.service;
 
+import com.daily_expenses.domain.exception.UserNotFoundException;
 import com.daily_expenses.domain.model.User;
 import com.daily_expenses.domain.repository.IUserRepository;
 import com.daily_expenses.domain.service.interfaces.IAuthService;
@@ -39,12 +40,13 @@ public class UserServiceImpl  implements IUserService {
 
     @Override
     public Optional<User> findById(Long id) {
-        return this.userRepository.findById(id);
+        return Optional.ofNullable(this.userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id)));
     }
 
     @Override
     public Optional<User> findByEmail(String email) {
-        return this.userRepository.findByEmail(email);
+        return Optional.ofNullable(this.userRepository.findByEmail(email)
+                .orElseThrow(() -> new UserNotFoundException("User not found with email: " + email)));
     }
 
     @Override

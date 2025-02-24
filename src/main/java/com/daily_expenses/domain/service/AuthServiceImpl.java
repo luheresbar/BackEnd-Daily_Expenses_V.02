@@ -1,20 +1,25 @@
 package com.daily_expenses.domain.service;
 
+import com.daily_expenses.domain.exception.UserNotFoundException;
 import com.daily_expenses.domain.service.interfaces.IAuthService;
 import com.daily_expenses.infrastructure.security.JwtUtils;
 import com.daily_expenses.infrastructure.security.UserDetailServiceImpl;
 import com.daily_expenses.web.dto.AuthLoginRequestDTO;
 import com.daily_expenses.web.dto.AuthResponseDTO;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
 
 @Service
+@Slf4j
 public class AuthServiceImpl implements IAuthService {
 
     @Autowired
@@ -29,15 +34,22 @@ public class AuthServiceImpl implements IAuthService {
         String email = authLoginRequest.email();
         String password = authLoginRequest.password();
 
-        Authentication authentication = this.authenticate(email, password);
-        setAuthentication(authentication);
 
-        String accessToken = jwtUtils.createToken(authentication);
-        return new AuthResponseDTO(authentication.getName(), "User logged successfully", accessToken, true);
+        try {
+            Authentication authentication = this.authenticate(email, password);
+            setAuthentication(authentication);
+
+            String accessToken = jwtUtils.createToken(authentication);
+            return new AuthResponseDTO(authentication.getName(), "User logged successfully", accessToken, true);
+
+        } catch (UsernameNotFoundException ex) {
+            throw new UserNotFoundException(ex.getMessage());
+        }
     }
 
     @Override
     public Authentication authenticate(String email, String password) {
+
         UserDetails userDetails = this.userDetailService.loadUserByUsername(email);
         String userId = userDetails.getUsername();
 

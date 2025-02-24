@@ -21,8 +21,13 @@ public class UserController {
         return ResponseEntity.ok(this.userService.findAll());
     }
 
-    @GetMapping("/find/{id}")
+    @GetMapping("/find/id/{id}")
     public ResponseEntity<Optional<User>> findById(@PathVariable Long id){
         return ResponseEntity.ok(this.userService.findById(id));
+    }
+
+    @GetMapping("/find/email/{email}")
+    public ResponseEntity<Optional<User>> findByEmail(@PathVariable String email){
+        return ResponseEntity.ok(this.userService.findByEmail(email));
     }
 }

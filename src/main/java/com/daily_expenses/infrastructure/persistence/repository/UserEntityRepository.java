@@ -50,7 +50,6 @@ public class UserEntityRepository implements IUserRepository {
     public User save(User user) {
         // Convert domain user to persistence user entity
         UserEntity userEntity = this.userMapper.toUserEntity(user);
-        System.out.println("userEntity antes de managedRoles: " + userEntity);
 
         // Ensure roles are managed entities
         Set<RoleEntity> managedRoles = userEntity.getRoles().stream()
@@ -59,8 +58,6 @@ public class UserEntityRepository implements IUserRepository {
                 .collect(Collectors.toSet());
 
         userEntity.setRoles(managedRoles);
-        System.out.println("userEntity despues de managedRoles: " + userEntity);
-
 
         // Save the user entity
         UserEntity savedUserEntity = this.userCrudRepository.save(userEntity);
