@@ -10,4 +10,6 @@ public interface IUserCrudRepository  extends CrudRepository<UserEntity, Long> {
 
     Optional<UserEntity> findUserEntityByEmail(String email);
 
+    Boolean existsByEmail(String email);
+
 }

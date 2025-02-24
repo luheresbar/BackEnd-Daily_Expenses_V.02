@@ -14,6 +14,8 @@ public interface IUserRepository {
 
     Optional<User> findByEmail(String email);
 
+    Boolean existsByEmail(String email);
+
     User save(User user);
 
 }

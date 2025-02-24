@@ -46,6 +46,11 @@ public class UserEntityRepository implements IUserRepository {
     }
 
     @Override
+    public Boolean existsByEmail(String email) {
+        return this.userCrudRepository.existsByEmail(email);
+    }
+
+    @Override
     @Transactional
     public User save(User user) {
         // Convert domain user to persistence user entity
