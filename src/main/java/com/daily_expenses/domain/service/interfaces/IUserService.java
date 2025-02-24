@@ -15,6 +15,8 @@ public interface IUserService {
 
     Optional<User> findByEmail(String email);
 
+    Boolean existsByEmail(String email);
+
     AuthResponseDTO createUser(AuthCreateUserRequestDTO createUserRequest);
 //    UserEntity getUserById(String userId);
 //    void updateUser(String userId, AuthCreateUserRequest updateUserRequest);

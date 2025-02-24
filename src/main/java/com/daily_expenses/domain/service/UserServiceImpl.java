@@ -50,10 +50,19 @@ public class UserServiceImpl  implements IUserService {
     }
 
     @Override
+    public Boolean existsByEmail(String email) {
+        return this.userRepository.existsByEmail(email);
+    }
+
+    @Override
     public AuthResponseDTO createUser(AuthCreateUserRequestDTO createUserRequest) {
+
+        if (this.existsByEmail(createUserRequest.email())) {
+            throw new IllegalArgumentException("Email already exists");
+        }
+
         User user = this.userFactory.createUser(createUserRequest);
         User savedUser = this.userRepository.save(user);
-
         UserDetails userDetails = this.userDetailService.buildUserDetails(savedUser);
         String userId = userDetails.getUsername();
         Authentication authentication = new UsernamePasswordAuthenticationToken(userId, null, userDetails.getAuthorities());

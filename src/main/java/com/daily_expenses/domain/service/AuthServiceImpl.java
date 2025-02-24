@@ -33,7 +33,6 @@ public class AuthServiceImpl implements IAuthService {
         String email = authLoginRequest.email();
         String password = authLoginRequest.password();
 
-
         try {
             Authentication authentication = this.authenticate(email, password);
             setAuthentication(authentication);
