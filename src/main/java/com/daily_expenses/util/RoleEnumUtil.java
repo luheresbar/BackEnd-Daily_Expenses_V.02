@@ -11,7 +11,14 @@ public class RoleEnumUtil {
             return true;
         } catch (IllegalArgumentException e) {
             return false;
+        }
+    }
 
+    public static RoleEnum convertStringToRoleEnum(String roleName) {
+        try {
+            return RoleEnum.valueOf(roleName.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("Role '" + roleName + "' not found in RoleEnum");
         }
     }
 }

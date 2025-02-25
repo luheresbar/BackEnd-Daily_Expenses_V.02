@@ -5,10 +5,10 @@ import com.daily_expenses.domain.repository.IRoleRepository;
 import com.daily_expenses.infrastructure.persistence.entity.PermissionEntity;
 import com.daily_expenses.infrastructure.persistence.entity.RoleEntity;
 import com.daily_expenses.infrastructure.persistence.entity.RoleEnum;
-import com.daily_expenses.infrastructure.persistence.entity.UserEntity;
 import com.daily_expenses.infrastructure.persistence.repository.crud.IPermissionCrudRepository;
 import com.daily_expenses.infrastructure.persistence.repository.crud.IRoleCrudRepository;
 import com.daily_expenses.infrastructure.persistence.mapper.IRoleMapper;
+import com.daily_expenses.util.RoleEnumUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -42,7 +42,7 @@ public class RoleEntityRepository implements IRoleRepository {
 
     @Override
     public Optional<Role> findByRoleName(String roleName) {
-        RoleEnum roleEnum = RoleEnum.valueOf(roleName);
+        RoleEnum roleEnum = RoleEnumUtil.convertStringToRoleEnum(roleName);
         Optional<RoleEntity> userEntity = this.roleCrudRepository.findByRoleName(roleEnum);
         return userEntity.map(entity -> this.roleMapper.toRole(entity));
     }

@@ -3,7 +3,6 @@ package com.daily_expenses.domain.service;
 import com.daily_expenses.domain.model.Role;
 import com.daily_expenses.domain.model.User;
 import com.daily_expenses.domain.repository.IRoleRepository;
-import com.daily_expenses.web.dto.AuthAssignRoleRequestDTO;
 import com.daily_expenses.web.dto.AuthCreateUserRequestDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,9 +33,8 @@ public class UserFactoryTest {
         String username = "Luis Diaz";
         String email = "luis.d@gmail.com";
         String password = "password123";
-        List<String> rolesRequest = List.of("USER");
-        AuthAssignRoleRequestDTO roleRequest = new AuthAssignRoleRequestDTO(rolesRequest);
-        AuthCreateUserRequestDTO createUserRequest = new AuthCreateUserRequestDTO(username, email, password, roleRequest);
+        List<String> roleListName = List.of("USER");
+        AuthCreateUserRequestDTO createUserRequest = new AuthCreateUserRequestDTO(username, email, password, roleListName);
 
         List<Role> allRoles = RoleDataProvider.roleListMock();
         Role userRole = allRoles.stream().filter(role -> "USER".equals(role.getRoleName())).findFirst().orElseThrow();
@@ -69,9 +67,8 @@ public class UserFactoryTest {
         String username = "Luis Diaz";
         String email = "luis.d@gmail.com";
         String password = "password123";
-        List<String> rolesRequest = List.of("NON_EXISTENT_ROLE");
-        AuthAssignRoleRequestDTO roleRequest = new AuthAssignRoleRequestDTO(rolesRequest);
-        AuthCreateUserRequestDTO createUserRequest = new AuthCreateUserRequestDTO(username, email, password, roleRequest);
+        List<String> roleListName = List.of("NON_EXISTENT_ROLE");
+        AuthCreateUserRequestDTO createUserRequest = new AuthCreateUserRequestDTO(username, email, password, roleListName);
 
         List<Role> allRoles = RoleDataProvider.roleListMock();
 

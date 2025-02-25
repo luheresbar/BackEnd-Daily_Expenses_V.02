@@ -1,0 +1,20 @@
+services:
+  mysql:
+    image: mysql
+    container_name: mysql_database
+    environment:
+      MYSQL_ROOT_PASSWORD: 1996
+      MYSQL_DATABASE: DailyExpenses
+      MYSQL_USER: luheresbar
+      MYSQL_PASSWORD: 474156
+    ports:
+      - "3306:3306"
+    networks:
+      - spring-network
+    volumes:
+      - mysql-volume:/var/lib/mysql
+
+networks:
+  spring-network:
+volumes:
+  mysql-volume:

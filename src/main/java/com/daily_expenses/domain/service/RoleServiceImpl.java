@@ -31,23 +31,15 @@ public class RoleServiceImpl implements IRoleService {
 
     @Override
     public Optional<Role> findByRoleName(String roleName) {
-        return Optional.ofNullable(this.roleRepository.findByRoleName(roleName).orElseThrow(() -> new RuntimeException("Role not found")));
-    }
-
-    public boolean isRoleEnumValid(String roleName) {
-        try {
-            RoleEnum.valueOf(roleName);
-            return true;
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
+        String roleNameUpperCase = roleName.toUpperCase();
+        return Optional.ofNullable(this.roleRepository.findByRoleName(roleNameUpperCase).orElseThrow(() -> new RuntimeException("Role not found in the database: " + roleNameUpperCase)));
     }
 
     @Override
     public RoleResponseDTO save(RoleUpdateRequestDTO roleCreateRequestDTO) {
 
         if (!RoleEnumUtil.isRoleEnumValid(roleCreateRequestDTO.roleName())) {
-            throw new IllegalArgumentException("Role does not exist in RoleEnum");
+            throw new IllegalArgumentException("Role '" + roleCreateRequestDTO.roleName() + "' not found in RoleEnum");
         }
 
         Role role = this.roleFactory.createRole(roleCreateRequestDTO);

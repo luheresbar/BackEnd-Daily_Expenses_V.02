@@ -28,7 +28,7 @@ public class UserFactory implements IUserFactory {
         String username = createUserRequest.username();
         String email = createUserRequest.email();
         String password = createUserRequest.password();
-        List<String> rolesRequest = createUserRequest.roleRequest().roleListName();
+        List<String> rolesRequest = createUserRequest.roleListName();
 
         // Fetch all valid roles from the database
         List<Role> allRoles = this.roleRepository.findAll();
