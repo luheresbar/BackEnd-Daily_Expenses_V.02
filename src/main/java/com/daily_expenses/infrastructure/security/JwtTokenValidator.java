@@ -2,7 +2,7 @@ package com.daily_expenses.infrastructure.security;
 
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.daily_expenses.web.advice.ErrorDetails;
+import com.daily_expenses.web.advice.ErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.servlet.FilterChain;
@@ -62,10 +62,16 @@ public class JwtTokenValidator extends OncePerRequestFilter {
             } catch (JWTVerificationException ex) {
                 logger.error("JWT verification failed: {}", ex.getMessage(), ex);
 
-                ErrorDetails errorDetails = new ErrorDetails(HttpStatus.UNAUTHORIZED, ex.getMessage(), request.getRequestURI());
+                ErrorResponse errorResponse = new ErrorResponse(
+                        HttpStatus.UNAUTHORIZED.value(),
+                        "https://example.com/probs/bad-credentials",
+                        "Bad Credentials",
+                        ex.getMessage(),
+                        request.getRequestURI()
+                );
                 response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                 response.setContentType("application/json");
-                response.getWriter().write(objectMapper.writeValueAsString(errorDetails));
+                response.getWriter().write(objectMapper.writeValueAsString(errorResponse));
                 response.getWriter().flush();
                 response.getWriter().close();
                 return;
