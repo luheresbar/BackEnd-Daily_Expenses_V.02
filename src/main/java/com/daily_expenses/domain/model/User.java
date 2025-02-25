@@ -19,7 +19,7 @@ public class User {
     private String email;
     private String password;
     private LocalDateTime registerDate;
-    private boolean isEnabled;
+    private boolean enabled;
     private boolean accountNoExpired;
     private boolean accountNoLocked;
     private boolean credentialNoExpired;

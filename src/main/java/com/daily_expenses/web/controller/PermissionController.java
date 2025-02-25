@@ -2,8 +2,7 @@ package com.daily_expenses.web.controller;
 
 import com.daily_expenses.domain.model.Permission;
 import com.daily_expenses.domain.service.interfaces.IPermissionService;
-import com.daily_expenses.web.dto.PermissionCreateRequestDTO;
-import com.daily_expenses.web.dto.PermissionResponseDTO;
+import com.daily_expenses.web.dto.PermissionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +22,7 @@ public class PermissionController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<PermissionResponseDTO> create(@RequestBody PermissionCreateRequestDTO permissionName) {
+    public ResponseEntity<PermissionDTO> create(@RequestBody PermissionDTO permissionName) {
         return ResponseEntity.ok(this.permissionService.create(permissionName.permissionName()));
     }
 }

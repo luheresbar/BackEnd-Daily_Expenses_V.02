@@ -5,7 +5,7 @@ import com.daily_expenses.domain.model.Role;
 import com.daily_expenses.domain.repository.IPermissionRepository;
 import com.daily_expenses.domain.repository.IRoleRepository;
 import com.daily_expenses.domain.service.interfaces.IRoleFactory;
-import com.daily_expenses.web.dto.RoleUpdateRequestDTO;
+import com.daily_expenses.web.dto.RoleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,9 +23,9 @@ public class RoleFactory implements IRoleFactory {
 
 
     @Override
-    public Role createRole(RoleUpdateRequestDTO roleCreateRequestDTO) {
-        String roleName = roleCreateRequestDTO.roleName();
-        List<String> permissionsRequest = roleCreateRequestDTO.permissionListName().stream()
+    public Role createRole(RoleDTO roleDTO) {
+        String roleName = roleDTO.roleName();
+        List<String> permissionsRequest = roleDTO.permissions().stream()
                 .map(String::toUpperCase)
                 .toList();
 

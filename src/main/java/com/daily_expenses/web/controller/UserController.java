@@ -2,6 +2,7 @@ package com.daily_expenses.web.controller;
 
 import com.daily_expenses.domain.model.User;
 import com.daily_expenses.domain.service.interfaces.IUserService;
+import com.daily_expenses.web.dto.UserUpdateRolesDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,5 +30,10 @@ public class UserController {
     @GetMapping("/find/email/{email}")
     public ResponseEntity<Optional<User>> findByEmail(@PathVariable String email){
         return ResponseEntity.ok(this.userService.findByEmail(email));
+    }
+
+    @PutMapping("/update/roles")
+    public ResponseEntity<UserUpdateRolesDTO> updateUserRoles(@RequestBody UserUpdateRolesDTO updateUserRolesDTO) {
+        return ResponseEntity.ok(this.userService.updateUserRoles(updateUserRolesDTO));
     }
 }

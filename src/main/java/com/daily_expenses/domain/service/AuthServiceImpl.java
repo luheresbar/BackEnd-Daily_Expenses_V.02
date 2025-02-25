@@ -17,9 +17,14 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+
 @Service
 @Slf4j
 public class AuthServiceImpl implements IAuthService {
+
+    private final ConcurrentMap<Long, String> invalidatedTokens = new ConcurrentHashMap<>();
 
     @Autowired
     private JwtUtils jwtUtils;
@@ -63,6 +68,18 @@ public class AuthServiceImpl implements IAuthService {
         SecurityContextHolder.getContext().setAuthentication(authentication);
     }
 
+    @Override
+    public void invalidateToken(Long userId) {
+        // Add the userId to the invalidated tokens map
+        invalidatedTokens.put(userId, "INVALIDATED");
+    }
+
+    @Override
+    public boolean isTokenInvalidated(Long userId) {
+        return invalidatedTokens.containsKey(userId);
+    }
+
+    @Override
     public Long getAuthenticatedUserId() {
         return Long.parseLong(SecurityContextHolder.getContext().getAuthentication().getName());
     }

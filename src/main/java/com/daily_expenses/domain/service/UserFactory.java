@@ -53,7 +53,7 @@ public class UserFactory implements IUserFactory {
                 .password(passwordEncoder.encode(password))
                 .email(email)
                 .roles(roleList)
-                .isEnabled(true)
+                .enabled(true)
                 .accountNoLocked(true)
                 .accountNoExpired(true)
                 .credentialNoExpired(true).build();

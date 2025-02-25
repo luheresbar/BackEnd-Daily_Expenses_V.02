@@ -37,6 +37,7 @@ public class SecurityConfig {
                     http.requestMatchers(HttpMethod.GET, "/api/user/find/all").hasAuthority("READ");
                     http.requestMatchers(HttpMethod.GET, "/api/user/find/id/{id}").hasAnyRole("DEVELOPER", "ADMIN");
                     http.requestMatchers(HttpMethod.GET, "/api/user/find/email/{email}").hasAnyRole("DEVELOPER", "ADMIN");
+                    http.requestMatchers(HttpMethod.PUT, "/api/user/update/roles").hasAnyRole("DEVELOPER", "ADMIN");
 
                     // Role
                     http.requestMatchers(HttpMethod.GET, "/api/role/find/all").hasAuthority("READ");

@@ -35,7 +35,7 @@ public class UserEntity {
     private LocalDateTime registerDate;
 
     @Column(name = "is_enabled")
-    private boolean isEnabled;
+    private boolean enabled;
 
     @Column(name = "account_No_Expired")
     private boolean accountNoExpired;

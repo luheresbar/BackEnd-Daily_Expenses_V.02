@@ -2,8 +2,7 @@ package com.daily_expenses.web.controller;
 
 import com.daily_expenses.domain.model.Role;
 import com.daily_expenses.domain.service.interfaces.IRoleService;
-import com.daily_expenses.web.dto.RoleUpdateRequestDTO;
-import com.daily_expenses.web.dto.RoleResponseDTO;
+import com.daily_expenses.web.dto.RoleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +28,7 @@ public class RoleController {
     }
 
     @PostMapping("/update")
-    public ResponseEntity<RoleResponseDTO> assignPermissions(@RequestBody RoleUpdateRequestDTO roleCreateRequestDTO) {
+    public ResponseEntity<RoleDTO> assignPermissions(@RequestBody RoleDTO roleCreateRequestDTO) {
         return ResponseEntity.ok(this.roleService.save(roleCreateRequestDTO));
     }
 

@@ -3,11 +3,12 @@ package com.daily_expenses.domain.service;
 import com.daily_expenses.domain.model.Permission;
 import com.daily_expenses.domain.repository.IPermissionRepository;
 import com.daily_expenses.domain.service.interfaces.IPermissionService;
-import com.daily_expenses.web.dto.PermissionResponseDTO;
+import com.daily_expenses.web.dto.PermissionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PermissionServiceImpl implements IPermissionService {
@@ -21,10 +22,10 @@ public class PermissionServiceImpl implements IPermissionService {
     }
 
     @Override
-    public PermissionResponseDTO create(String permissionName) {
+    public PermissionDTO create(String permissionName) {
         Permission newPermission = new Permission();
         newPermission.setName(permissionName);
         Permission permission = this.permissionRepository.save(newPermission);
-        return new PermissionResponseDTO(permission.getName(), "Permission created successfully");
+        return new PermissionDTO(permission.getName(), Optional.of("Permission created successfully"));
     }
 }
