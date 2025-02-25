@@ -9,7 +9,5 @@ public interface IAuthService {
     AuthResponseDTO loginUser(AuthLoginRequestDTO authLoginRequest);
     Authentication authenticate(String email, String password);
     void setAuthentication(Authentication authentication);
-    void invalidateToken(Long userId);
     Long getAuthenticatedUserId();
-    boolean isTokenInvalidated(Long userId);
 }

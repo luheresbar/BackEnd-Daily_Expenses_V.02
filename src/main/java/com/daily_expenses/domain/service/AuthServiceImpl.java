@@ -24,8 +24,6 @@ import java.util.concurrent.ConcurrentMap;
 @Slf4j
 public class AuthServiceImpl implements IAuthService {
 
-    private final ConcurrentMap<Long, String> invalidatedTokens = new ConcurrentHashMap<>();
-
     @Autowired
     private JwtUtils jwtUtils;
     @Autowired
@@ -66,17 +64,6 @@ public class AuthServiceImpl implements IAuthService {
 
     public void setAuthentication(Authentication authentication) {
         SecurityContextHolder.getContext().setAuthentication(authentication);
-    }
-
-    @Override
-    public void invalidateToken(Long userId) {
-        // Add the userId to the invalidated tokens map
-        invalidatedTokens.put(userId, "INVALIDATED");
-    }
-
-    @Override
-    public boolean isTokenInvalidated(Long userId) {
-        return invalidatedTokens.containsKey(userId);
     }
 
     @Override

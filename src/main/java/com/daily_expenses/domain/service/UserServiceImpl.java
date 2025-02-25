@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -115,15 +114,6 @@ public class UserServiceImpl implements IUserService {
         List<String> roleListRequest = updatedUser.getRoles().stream()
                 .map(Role::getRoleName)
                 .collect(Collectors.toList());
-
-        // Invalidate the current token (implementation depends on your token management strategy)
-        this.authService.invalidateToken(updatedUser.getUserId());
-
-        // Update the SecurityContextHolder with the new authentication
-        UserDetails userDetails = this.userDetailService.buildUserDetails(updatedUser);
-        String userId = userDetails.getUsername();
-        Authentication authentication = new UsernamePasswordAuthenticationToken(userId, null, userDetails.getAuthorities());
-        this.authService.setAuthentication(authentication);
 
         // Devuelve el DTO actualizado
         return new UserUpdateRolesDTO(updatedUser.getEmail(), roleListRequest, Optional.of("User roles updated successfully"));
