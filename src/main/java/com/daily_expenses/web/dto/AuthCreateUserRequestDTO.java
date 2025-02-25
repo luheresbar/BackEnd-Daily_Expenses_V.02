@@ -7,5 +7,5 @@ public record AuthCreateUserRequestDTO(
         @NotBlank String username,
         @NotBlank String email,
         @NotBlank String password,
-        @Valid AuthCreateRoleRequestDTO roleRequest) {
+        AuthAssignRoleRequestDTO roleRequest) {
 }

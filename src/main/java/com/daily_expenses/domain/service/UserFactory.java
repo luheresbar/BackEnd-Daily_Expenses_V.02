@@ -33,7 +33,7 @@ public class UserFactory implements IUserFactory {
         // Fetch all valid roles from the database
         List<Role> allRoles = this.roleRepository.findAll();
         Set<String> validRoleEnums = allRoles.stream()
-                .map(Role::getRoleEnum)
+                .map(Role::getRoleName)
                 .collect(Collectors.toSet());
 
         // Check if any requested role does not exist
@@ -45,7 +45,7 @@ public class UserFactory implements IUserFactory {
 
         // Filter the roles that match the requested roles
         Set<Role> roleList = allRoles.stream()
-                .filter(role -> rolesRequest.contains(role.getRoleEnum()))
+                .filter(role -> rolesRequest.contains(role.getRoleName()))
                 .collect(Collectors.toSet());
 
         return User.builder()

@@ -4,5 +4,6 @@ public enum RoleEnum {
     ADMIN,
     USER,
     INVITED,
-    DEVELOPER
+    DEVELOPER,
+    SUPER
 }

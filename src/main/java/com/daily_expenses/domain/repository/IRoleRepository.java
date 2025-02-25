@@ -10,7 +10,10 @@ public interface IRoleRepository {
 
     List<Role> findAll();
     Optional<Role> findById(Long roleId);
-    List<Role> findRoleEntitiesByRoleEnumIn(List<String> roleNames);
+    Optional<Role> findByRoleName(String roleName);
+    Boolean existByRoleName(String roleName);
+    List<Role> findRoleEntitiesByRoleNameIn(List<String> roleNames);
+    Role save(Role role);
 
 
 }

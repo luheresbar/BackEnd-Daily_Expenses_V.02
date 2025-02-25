@@ -6,7 +6,7 @@ import com.daily_expenses.domain.service.interfaces.IAuthService;
 import com.daily_expenses.domain.service.interfaces.IUserFactory;
 import com.daily_expenses.infrastructure.security.JwtUtils;
 import com.daily_expenses.infrastructure.security.UserDetailServiceImpl;
-import com.daily_expenses.web.dto.AuthCreateRoleRequestDTO;
+import com.daily_expenses.web.dto.AuthAssignRoleRequestDTO;
 import com.daily_expenses.web.dto.AuthCreateUserRequestDTO;
 import com.daily_expenses.web.dto.AuthResponseDTO;
 import org.junit.jupiter.api.Test;
@@ -129,7 +129,7 @@ public class UserServiceImplTest {
         String username = "Luis Diaz";
         String email = "luis.d@gmail.com";
         String password = "password123";
-        AuthCreateRoleRequestDTO roleRequest = new AuthCreateRoleRequestDTO(List.of("USER"));
+        AuthAssignRoleRequestDTO roleRequest = new AuthAssignRoleRequestDTO(List.of("USER"));
         AuthCreateUserRequestDTO createUserRequest = new AuthCreateUserRequestDTO(username, email, password, roleRequest);
 
         User newUser = UserDataProvider.newUserMock();

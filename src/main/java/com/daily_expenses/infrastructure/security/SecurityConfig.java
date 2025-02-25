@@ -33,9 +33,21 @@ public class SecurityConfig {
                     http.requestMatchers(HttpMethod.POST, "/api/auth/**").permitAll();
 
                     // EndPoints Privados
+                    // User
                     http.requestMatchers(HttpMethod.GET, "/api/user/find/all").hasAuthority("READ");
                     http.requestMatchers(HttpMethod.GET, "/api/user/find/id/{id}").hasAnyRole("DEVELOPER", "ADMIN");
                     http.requestMatchers(HttpMethod.GET, "/api/user/find/email/{email}").hasAnyRole("DEVELOPER", "ADMIN");
+
+                    // Role
+                    http.requestMatchers(HttpMethod.GET, "/api/role/find/all").hasAuthority("READ");
+                    http.requestMatchers(HttpMethod.GET, "/api/role/find/name/{roleName}").hasAnyRole("DEVELOPER", "ADMIN");
+                    http.requestMatchers(HttpMethod.POST, "/api/role/update").hasAnyAuthority("READ", "CREATE");
+
+                    // Permission
+                    http.requestMatchers(HttpMethod.GET, "/api/permission/find/all").hasAuthority("READ");
+                    http.requestMatchers(HttpMethod.POST, "/api/permission/create").hasAnyAuthority("READ", "CREATE");
+
+                    // HTTP Method
                     http.requestMatchers(HttpMethod.POST, "/method/post").hasAuthority("CREATE");
                     http.requestMatchers(HttpMethod.DELETE, "/method/delete").hasAuthority("DELETE");
                     http.requestMatchers(HttpMethod.PUT, "/method/put").hasAuthority("UPDATE");

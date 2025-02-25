@@ -1,6 +1,7 @@
 package com.daily_expenses.infrastructure.persistence.repository;
 
 import com.daily_expenses.domain.model.Permission;
+import com.daily_expenses.domain.model.Role;
 import com.daily_expenses.domain.repository.IPermissionRepository;
 import com.daily_expenses.infrastructure.persistence.entity.PermissionEntity;
 import com.daily_expenses.infrastructure.persistence.repository.crud.IPermissionCrudRepository;
@@ -22,5 +23,11 @@ public class PermissionEntityRepository implements IPermissionRepository {
     public List<Permission> findAll() {
         List<PermissionEntity> permissionEntities = (List<PermissionEntity>) this.permissionCrudRepository.findAll();
         return this.permissionMapper.toPermissionList(permissionEntities);
+    }
+
+    @Override
+    public Permission save(Permission permission) {
+        PermissionEntity permissionEntity = this.permissionMapper.toPermissionEntity(permission);
+        return this.permissionMapper.topermission(this.permissionCrudRepository.save(permissionEntity));
     }
 }

@@ -7,6 +7,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@Builder
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
@@ -14,7 +15,7 @@ import java.util.Set;
 public class Role {
 
     private Long id;
-    private String roleEnum;
+    private String roleName;
     private Set<Permission> permissionList;
 
 }

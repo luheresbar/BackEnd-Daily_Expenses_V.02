@@ -1,11 +1,9 @@
 package com.daily_expenses.domain.service;
 
-import com.daily_expenses.domain.model.Permission;
 import com.daily_expenses.domain.model.Role;
 import com.daily_expenses.domain.model.User;
 import com.daily_expenses.domain.repository.IRoleRepository;
-import com.daily_expenses.domain.service.interfaces.IUserFactory;
-import com.daily_expenses.web.dto.AuthCreateRoleRequestDTO;
+import com.daily_expenses.web.dto.AuthAssignRoleRequestDTO;
 import com.daily_expenses.web.dto.AuthCreateUserRequestDTO;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,7 +13,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.List;
-import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -38,11 +35,11 @@ public class UserFactoryTest {
         String email = "luis.d@gmail.com";
         String password = "password123";
         List<String> rolesRequest = List.of("USER");
-        AuthCreateRoleRequestDTO roleRequest = new AuthCreateRoleRequestDTO(rolesRequest);
+        AuthAssignRoleRequestDTO roleRequest = new AuthAssignRoleRequestDTO(rolesRequest);
         AuthCreateUserRequestDTO createUserRequest = new AuthCreateUserRequestDTO(username, email, password, roleRequest);
 
         List<Role> allRoles = RoleDataProvider.roleListMock();
-        Role userRole = allRoles.stream().filter(role -> "USER".equals(role.getRoleEnum())).findFirst().orElseThrow();
+        Role userRole = allRoles.stream().filter(role -> "USER".equals(role.getRoleName())).findFirst().orElseThrow();
 
         // When
         when(roleRepository.findAll()).thenReturn(allRoles);
@@ -73,7 +70,7 @@ public class UserFactoryTest {
         String email = "luis.d@gmail.com";
         String password = "password123";
         List<String> rolesRequest = List.of("NON_EXISTENT_ROLE");
-        AuthCreateRoleRequestDTO roleRequest = new AuthCreateRoleRequestDTO(rolesRequest);
+        AuthAssignRoleRequestDTO roleRequest = new AuthAssignRoleRequestDTO(rolesRequest);
         AuthCreateUserRequestDTO createUserRequest = new AuthCreateUserRequestDTO(username, email, password, roleRequest);
 
         List<Role> allRoles = RoleDataProvider.roleListMock();

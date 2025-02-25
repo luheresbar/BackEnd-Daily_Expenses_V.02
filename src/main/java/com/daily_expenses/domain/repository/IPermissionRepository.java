@@ -8,4 +8,5 @@ import java.util.List;
 public interface IPermissionRepository {
 
     List<Permission> findAll();
+    Permission save(Permission permissionName);
 }
