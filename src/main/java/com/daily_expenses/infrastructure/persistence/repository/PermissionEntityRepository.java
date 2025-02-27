@@ -1,7 +1,6 @@
 package com.daily_expenses.infrastructure.persistence.repository;
 
 import com.daily_expenses.domain.model.Permission;
-import com.daily_expenses.domain.model.Role;
 import com.daily_expenses.domain.repository.IPermissionRepository;
 import com.daily_expenses.infrastructure.persistence.entity.PermissionEntity;
 import com.daily_expenses.infrastructure.persistence.repository.crud.IPermissionCrudRepository;

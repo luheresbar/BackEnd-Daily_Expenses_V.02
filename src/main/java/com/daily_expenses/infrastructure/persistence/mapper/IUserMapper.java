@@ -5,7 +5,6 @@ import com.daily_expenses.infrastructure.persistence.entity.UserEntity;
 import org.mapstruct.Mapper;
 
 import java.util.List;
-import java.util.Optional;
 
 @Mapper(componentModel = "spring")
 public interface IUserMapper {

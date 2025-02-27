@@ -17,10 +17,7 @@ import java.util.stream.Collectors;
 public class RoleFactory implements IRoleFactory {
 
     @Autowired
-    private IRoleRepository roleRepository;
-    @Autowired
     private IPermissionRepository permissionRepository;
-
 
     @Override
     public Role createRole(RoleDTO roleDTO) {

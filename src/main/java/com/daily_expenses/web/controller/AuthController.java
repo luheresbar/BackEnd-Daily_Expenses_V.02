@@ -2,7 +2,6 @@ package com.daily_expenses.web.controller;
 
 import com.daily_expenses.domain.service.interfaces.IAuthService;
 import com.daily_expenses.domain.service.interfaces.IUserService;
-import com.daily_expenses.infrastructure.security.UserDetailServiceImpl;
 import com.daily_expenses.web.dto.AuthCreateUserRequestDTO;
 import com.daily_expenses.web.dto.AuthLoginRequestDTO;
 import com.daily_expenses.web.dto.AuthResponseDTO;
