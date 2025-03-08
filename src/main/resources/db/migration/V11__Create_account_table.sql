@@ -1,0 +1,12 @@
+CREATE TABLE accounts (
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    account_name VARCHAR(30) NOT NULL,
+    user_id INT NOT NULL,
+    available_money DOUBLE DEFAULT 0,
+    available BOOLEAN DEFAULT TRUE,
+    creation_date DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    last_modified_date DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    account_type VARCHAR(20) NOT NULL,
+    currency VARCHAR(3) NOT NULL,
+    status VARCHAR(10) NOT NULL
+);
